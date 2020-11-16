@@ -90,7 +90,6 @@ class _MyAppState extends State<MyApp> {
                     onPressed: startListening,
                     child: Text('start listening position'),
                   ),
-                  Text(_currentLocation),
                   StreamBuilder<dynamic>(
                     builder: (context, data) {
                       if (data != null) {
