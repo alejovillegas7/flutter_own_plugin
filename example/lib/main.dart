@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion\n'),
               FlatButton(
+                color: Colors.blue,
                 onPressed: requestPermission,
                 child: Text('request permission'),
               ),
@@ -90,12 +91,16 @@ class _MyAppState extends State<MyApp> {
                     child: Text('start listening position'),
                   ),
                   Text(_currentLocation),
-                  StreamBuilder<String>(builder: (context, data) {
-                    if (data != null) {
-                      _currentLocation = data.data ?? 'data.data is null';
-                    }
-                    return Text(_currentLocation);
-                  }),
+                  StreamBuilder<dynamic>(
+                    builder: (context, data) {
+                      if (data != null) {
+                        _currentLocation = data.data ?? 'data.data is null';
+                      }
+                      return Text(_currentLocation);
+                    },
+                    initialData: 'no data from the builder',
+                    stream: FlutterOwnPlugin.locationEventStream,
+                  ),
                 ],
               ),
             ],
